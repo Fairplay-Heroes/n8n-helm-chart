@@ -1,8 +1,8 @@
 environments:
   default:
     values:
-      - namespace: n8n-dev
-      - domain: "n8ndev.app.8gears.com"
+      - namespace: n8n
+      - domain: "n8ndev.app.hypehog.ai"
       - encryption_key: "iam not a secret"
       - db_password: "iam not a secret"
 
@@ -10,10 +10,10 @@ helmDefaults:
   wait: true
   timeout: 66
 
-repositories:
-  - name: 8gears
-    url: 8gears.container-registry.com/library
-    oci: true
+# repositories:
+#  - name: 8gears
+#    url: 8gears.container-registry.com/library
+#    oci: true
 
 releases:
   - name: n8n
