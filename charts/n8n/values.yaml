@@ -30,16 +30,16 @@ secret: {}
 
 ## ALL possible n8n Values
 
-# database:
-#  type:             # Type of database to use - Other possible types ['sqlite', 'mariadb', 'mysqldb', 'postgresdb'] - default: sqlite
+database:
+  type: postgresdb             # Type of database to use - Other possible types ['sqlite', 'mariadb', 'mysqldb', 'postgresdb'] - default: sqlite
 #  tablePrefix:      # Prefix for table names - default: ''
-#  postgresdb:
-#    database:       # PostgresDB Database - default: n8n
-#    host:           # PostgresDB Host - default: localhost
-#    password:        # PostgresDB Password - default: ''
-#    port:            # PostgresDB Port - default: 5432
-#    user:            # PostgresDB User - default: root
-#    schema:            # PostgresDB Schema - default: public
+  postgresdb:
+    database: n8n       # PostgresDB Database - default: n8n
+    host:           # PostgresDB Host - default: localhost
+    password:        # PostgresDB Password - default: ''
+    port:            # PostgresDB Port - default: 5432
+    user:            # PostgresDB User - default: root
+    schema:            # PostgresDB Schema - default: public
 #    ssl:
 #      ca:            # SSL certificate authority - default: ''
 #      cert:            # SSL certificate - default: ''
@@ -66,8 +66,8 @@ secret: {}
 #  pruneData:            # Delete data of past executions on a rolling basis - default: false
 #  pruneDataMaxAge:        # How old (hours) the execution data has to be to get deleted - default: 336
 #  pruneDataTimeout:        # Timeout (seconds) after execution data has been pruned - default: 3600
-# generic:
-#  timezone:     # The timezone to use - default: America/New_York
+generic:
+  timezone: Europe/London     # The timezone to use - default: America/New_York
 # path:         # Path n8n is deployed to - default: "/"
 # host:         # Host name n8n can be reached - default: localhost
 # port:         # HTTP port n8n can be reached - default: 5678
@@ -104,7 +104,7 @@ secret: {}
 # Set additional environment variables on the Deployment
 extraEnv: {}
 # Set this if running behind a reverse proxy and the external port is different from the port n8n runs on
-#   WEBHOOK_URL: "https://n8n.myhost.com/
+WEBHOOK_URL: "https://n8n.hypehog.ai/
 
 # Set additional environment from existing secrets
 extraEnvSecrets: {}
@@ -120,9 +120,9 @@ extraEnvSecrets: {}
 persistence:
   ## If true, use a Persistent Volume Claim, If false, use emptyDir
   ##
-  enabled: false
+  enabled: true
   # what type volume, possible options are [existing, emptyDir, dynamic] dynamic for Dynamic Volume Provisioning, existing for using an existing Claim
-  type: emptyDir
+  # type: emptyDir
   ## Persistent Volume Storage Class
   ## If defined, storageClassName: <storageClass>
   ## If set to "-", storageClassName: "", which disables dynamic provisioning
@@ -259,10 +259,10 @@ service:
   annotations: {}
 
 ingress:
-  enabled: false
+  enabled: true
   annotations: {}
-  # kubernetes.io/ingress.class: nginx
-  # kubernetes.io/tls-acme: "true"
+   kubernetes.io/ingress.class: nginx
+   kubernetes.io/tls-acme: "true"
   hosts:
     - host: chart-example.local
       paths: []
@@ -272,7 +272,7 @@ ingress:
   #      - chart-example.local
 
   # define a custom incressClassName, like "traefik" or "nginx"
-  className: ""
+  className: "nginx"
 
 workerResources:
   {}
@@ -294,7 +294,7 @@ resources:
   #   memory: 128Mi
 
 autoscaling:
-  enabled: false
+  enabled: true
   minReplicas: 1
   maxReplicas: 100
   targetCPUUtilizationPercentage: 80
@@ -307,7 +307,7 @@ tolerations: []
 affinity: {}
 
 scaling:
-  enabled: false
+  enabled: true
 
   worker:
     count: 2
